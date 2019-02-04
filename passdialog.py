@@ -27,7 +27,10 @@ def grep(pattern,word_list):
 d=Dialog()
 #d.set_backgound_title("find a password entry")
 
-code, answer = d.inputbox("Input your query", init="")
+code, answer = d.inputbox("Input your query", 
+		width=(os.get_terminal_size().columns-10),
+		init=""
+	)
 
 if (code != "ok"):
 	print(code)
@@ -59,17 +62,20 @@ for p in grep(answer, passwords):
 	chdict[item]=p
 	i=i+1
 
-code, answer = d.menu("Select remains", height=23, menu_height=18, width=76,
-		choices=choices
+code, answer = d.menu("Select remains", 
+		height=(os.get_terminal_size().lines-3), 
+		menu_height=(os.get_terminal_size().lines-8), 
+		width=(os.get_terminal_size().columns-4),
+		choices=choices,
 	)
 
 if (code != "ok"):
 	print(code)
 	exit(1)
 
-print("")
-print("")
+print("\n" * os.get_terminal_size().lines)
 os.system("pass -c "+chdict[answer])
+print("\n" * int(os.get_terminal_size().lines / 2) )
 
 time.sleep(47)
 
