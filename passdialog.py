@@ -67,13 +67,14 @@ code, answer = d.menu("Select remains",
 		menu_height=(os.get_terminal_size().lines-8), 
 		width=(os.get_terminal_size().columns-4),
 		choices=choices,
+		clear=True
 	)
 
 if (code != "ok"):
 	print(code)
 	exit(1)
 
-print("\n" * os.get_terminal_size().lines)
+print(((" " * os.get_terminal_size().columns) + "\n") * os.get_terminal_size().lines)
 os.system("pass -c "+chdict[answer])
 print("\n" * int(os.get_terminal_size().lines / 2) )
 
