@@ -28,7 +28,7 @@ d=Dialog()
 #d.set_backgound_title("find a password entry")
 
 code, answer = d.inputbox("Input your query", 
-		width=(os.get_terminal_size().columns-10),
+		width=(os.get_terminal_size().columns-30),
 		init=""
 	)
 
