@@ -62,6 +62,14 @@ for p in grep(answer, passwords):
 	chdict[item]=p
 	i=i+1
 
+if len(choices) == 0:
+	d.infobox(
+			"could not find any passwords matching '"+answer+"'",
+			width=(os.get_terminal_size().columns-10),
+		)
+	time.sleep(10)
+	exit(0)
+
 code, answer = d.menu("Select remains", 
 		height=(os.get_terminal_size().lines-3), 
 		menu_height=(os.get_terminal_size().lines-8), 
