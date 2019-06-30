@@ -39,7 +39,6 @@ if (code != "ok"):
 passdir=os.getenv("PASSWORD_STORE_DIR", os.getenv("HOME")+"/.password-store")
 os.chdir(passdir)
 
-
 # find password store entrys 
 passwords=[]
 for root, dirs, files in os.walk("."):
@@ -82,9 +81,25 @@ if (code != "ok"):
 	print(code)
 	exit(1)
 
-print(((" " * os.get_terminal_size().columns) + "\n") * os.get_terminal_size().lines)
-os.system("pass -c "+chdict[answer])
-print("\n" * int(os.get_terminal_size().lines / 2) )
+# print(((" " * os.get_terminal_size().columns) + "\n") * os.get_terminal_size().lines)
+result=os.system("pass -c "+chdict[answer])
+#print("\n" * int(os.get_terminal_size().lines / 2) )
 
-time.sleep(47)
+if result != 0:
+	time.sleep(10)
+	exit(result);
+
+t=0
+t_max=45
+
+d.gauge_start(text=("Copied "+chdict[answer]+" to clipboard. This is the timeout!"))
+
+while t <= t_max:
+	d.gauge_update(int((float(t)/float(t_max))*100))
+	t=t+1
+	time.sleep(1)
+
+d.gauge_stop()
+
+time.sleep(1)
 
